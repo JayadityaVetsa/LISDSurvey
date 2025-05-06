@@ -17,6 +17,12 @@
 		EDA954DB2DBFBDAE00B8B7FA /* LISDSurveyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA954DA2DBFBDAE00B8B7FA /* LISDSurveyTests.swift */; };
 		EDA954E52DBFBDAE00B8B7FA /* LISDSurveyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA954E42DBFBDAE00B8B7FA /* LISDSurveyUITests.swift */; };
 		EDA954E72DBFBDAE00B8B7FA /* LISDSurveyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA954E62DBFBDAE00B8B7FA /* LISDSurveyUITestsLaunchTests.swift */; };
+		EDD913442DC505A00043061D /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD913432DC505A00043061D /* HomePage.swift */; };
+		EDD913462DC509500043061D /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD913452DC509500043061D /* ProfilePage.swift */; };
+		EDD913482DC50C970043061D /* OngoingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD913472DC50C970043061D /* OngoingView.swift */; };
+		EDD9134A2DC50CBF0043061D /* FinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD913492DC50CBF0043061D /* FinishedView.swift */; };
+		EDD9134C2DC50D180043061D /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD9134B2DC50D180043061D /* AuthView.swift */; };
+		EDD9134E2DC50EF60043061D /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD9134D2DC50EF60043061D /* MainTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +56,12 @@
 		EDA954E02DBFBDAE00B8B7FA /* LISDSurveyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LISDSurveyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDA954E42DBFBDAE00B8B7FA /* LISDSurveyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LISDSurveyUITests.swift; sourceTree = "<group>"; };
 		EDA954E62DBFBDAE00B8B7FA /* LISDSurveyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LISDSurveyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EDD913432DC505A00043061D /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		EDD913452DC509500043061D /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
+		EDD913472DC50C970043061D /* OngoingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingView.swift; sourceTree = "<group>"; };
+		EDD913492DC50CBF0043061D /* FinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedView.swift; sourceTree = "<group>"; };
+		EDD9134B2DC50D180043061D /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		EDD9134D2DC50EF60043061D /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,9 +112,15 @@
 		EDA954C82DBFBDAC00B8B7FA /* LISDSurvey */ = {
 			isa = PBXGroup;
 			children = (
+				EDD9134B2DC50D180043061D /* AuthView.swift */,
+				EDD913452DC509500043061D /* ProfilePage.swift */,
 				EDA954C92DBFBDAC00B8B7FA /* LISDSurveyApp.swift */,
+				EDD913432DC505A00043061D /* HomePage.swift */,
 				EDA954CB2DBFBDAC00B8B7FA /* ContentView.swift */,
 				ED6C02232DC26BBD006463A5 /* SocialLoginView.swift */,
+				EDD913472DC50C970043061D /* OngoingView.swift */,
+				EDD913492DC50CBF0043061D /* FinishedView.swift */,
+				EDD9134D2DC50EF60043061D /* MainTabView.swift */,
 				ED6C02252DC26CD3006463A5 /* google_logo.png */,
 				ED6C02272DC26D5C006463A5 /* facebook_logo.png */,
 				EDA954CD2DBFBDAD00B8B7FA /* Assets.xcassets */,
@@ -269,8 +287,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED6C02242DC26BBD006463A5 /* SocialLoginView.swift in Sources */,
+				EDD9134A2DC50CBF0043061D /* FinishedView.swift in Sources */,
+				EDD9134E2DC50EF60043061D /* MainTabView.swift in Sources */,
 				EDA954CC2DBFBDAC00B8B7FA /* ContentView.swift in Sources */,
+				EDD913462DC509500043061D /* ProfilePage.swift in Sources */,
 				EDA954CA2DBFBDAC00B8B7FA /* LISDSurveyApp.swift in Sources */,
+				EDD913482DC50C970043061D /* OngoingView.swift in Sources */,
+				EDD9134C2DC50D180043061D /* AuthView.swift in Sources */,
+				EDD913442DC505A00043061D /* HomePage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
