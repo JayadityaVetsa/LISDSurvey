@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED56292F2DCA559E00D375D0 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED56292E2DCA559E00D375D0 /* AppColors.swift */; };
+		ED5629312DCA55BD00D375D0 /* SurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5629302DCA55BD00D375D0 /* SurveyModel.swift */; };
+		ED5629332DCA55E200D375D0 /* SurveyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5629322DCA55E200D375D0 /* SurveyCardView.swift */; };
+		ED5629352DCA560B00D375D0 /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5629342DCA560B00D375D0 /* SurveyView.swift */; };
+		ED5629372DCA563200D375D0 /* SurveyCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5629362DCA563200D375D0 /* SurveyCategoriesView.swift */; };
 		ED6C02242DC26BBD006463A5 /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C02232DC26BBD006463A5 /* SocialLoginView.swift */; };
 		ED6C02262DC26CD3006463A5 /* google_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED6C02252DC26CD3006463A5 /* google_logo.png */; };
 		ED6C02282DC26D5C006463A5 /* facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED6C02272DC26D5C006463A5 /* facebook_logo.png */; };
@@ -43,6 +48,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED56292E2DCA559E00D375D0 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		ED5629302DCA55BD00D375D0 /* SurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModel.swift; sourceTree = "<group>"; };
+		ED5629322DCA55E200D375D0 /* SurveyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyCardView.swift; sourceTree = "<group>"; };
+		ED5629342DCA560B00D375D0 /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
+		ED5629362DCA563200D375D0 /* SurveyCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyCategoriesView.swift; sourceTree = "<group>"; };
 		ED6C02232DC26BBD006463A5 /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
 		ED6C02252DC26CD3006463A5 /* google_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = google_logo.png; sourceTree = "<group>"; };
 		ED6C02272DC26D5C006463A5 /* facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_logo.png; sourceTree = "<group>"; };
@@ -112,6 +122,10 @@
 		EDA954C82DBFBDAC00B8B7FA /* LISDSurvey */ = {
 			isa = PBXGroup;
 			children = (
+				ED5629362DCA563200D375D0 /* SurveyCategoriesView.swift */,
+				ED5629342DCA560B00D375D0 /* SurveyView.swift */,
+				ED5629302DCA55BD00D375D0 /* SurveyModel.swift */,
+				ED56292E2DCA559E00D375D0 /* AppColors.swift */,
 				EDD9134B2DC50D180043061D /* AuthView.swift */,
 				EDD913452DC509500043061D /* ProfilePage.swift */,
 				EDA954C92DBFBDAC00B8B7FA /* LISDSurveyApp.swift */,
@@ -121,6 +135,7 @@
 				EDD913472DC50C970043061D /* OngoingView.swift */,
 				EDD913492DC50CBF0043061D /* FinishedView.swift */,
 				EDD9134D2DC50EF60043061D /* MainTabView.swift */,
+				ED5629322DCA55E200D375D0 /* SurveyCardView.swift */,
 				ED6C02252DC26CD3006463A5 /* google_logo.png */,
 				ED6C02272DC26D5C006463A5 /* facebook_logo.png */,
 				EDA954CD2DBFBDAD00B8B7FA /* Assets.xcassets */,
@@ -286,9 +301,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED5629372DCA563200D375D0 /* SurveyCategoriesView.swift in Sources */,
+				ED5629312DCA55BD00D375D0 /* SurveyModel.swift in Sources */,
 				ED6C02242DC26BBD006463A5 /* SocialLoginView.swift in Sources */,
+				ED5629332DCA55E200D375D0 /* SurveyCardView.swift in Sources */,
 				EDD9134A2DC50CBF0043061D /* FinishedView.swift in Sources */,
 				EDD9134E2DC50EF60043061D /* MainTabView.swift in Sources */,
+				ED56292F2DCA559E00D375D0 /* AppColors.swift in Sources */,
+				ED5629352DCA560B00D375D0 /* SurveyView.swift in Sources */,
 				EDA954CC2DBFBDAC00B8B7FA /* ContentView.swift in Sources */,
 				EDD913462DC509500043061D /* ProfilePage.swift in Sources */,
 				EDA954CA2DBFBDAC00B8B7FA /* LISDSurveyApp.swift in Sources */,

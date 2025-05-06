@@ -10,102 +10,93 @@ struct AuthView: View {
 
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            AppColors.background.ignoresSafeArea()
             VStack(alignment: .leading, spacing: 0) {
                 Spacer().frame(height: 40)
                 Button(action: {
                     // Back action
                 }) {
                     Image(systemName: "chevron.left")
-                        .foregroundColor(.white)
-                        .font(.title2)
-                        .padding(.leading, 8)
+                        .foregroundColor(AppColors.primary)
+                        .font(.system(size: 24, weight: .semibold))
+                        .padding(.leading, 16)
                 }
-                Spacer().frame(height: 10)
-                Text("Go ahead and set up\nyour account")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.leading)
-                    .padding(.horizontal)
-                Text("Sign in-up to enjoy the best managing experience")
-                    .font(.system(size: 16))
-                    .foregroundColor(.gray)
-                    .padding(.horizontal)
+                Spacer().frame(height: 20)
+                Text(selectedTab == 0 ? "Welcome Back!" : "Create Account")
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .foregroundColor(AppColors.textPrimary)
+                    .padding(.horizontal, 16)
+                Text(selectedTab == 0 ? "Sign in to continue" : "Join us to start managing surveys")
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .foregroundColor(AppColors.textSecondary)
+                    .padding(.horizontal, 16)
                     .padding(.top, 8)
                 Spacer().frame(height: 30)
-                VStack(spacing: 24) {
+                VStack(spacing: 20) {
                     // Segmented control
-                    HStack {
-                        Button(action: { selectedTab = 0 }) {
-                            Text("Login")
-                                .fontWeight(.semibold)
-                                .foregroundColor(selectedTab == 0 ? .black : .gray)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 10)
-                                .background(
-                                    Group {
-                                        if selectedTab == 0 {
-                                            Color.white.clipShape(Capsule())
-                                        } else {
-                                            Color.clear
-                                        }
-                                    }
-                                )
-                        }
-                        Button(action: { selectedTab = 1 }) {
-                            Text("Register")
-                                .fontWeight(.semibold)
-                                .foregroundColor(selectedTab == 1 ? .black : .gray)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 10)
-                                .background(
-                                    Group {
-                                        if selectedTab == 1 {
-                                            Color.white.opacity(0.4).clipShape(Capsule())
-                                        } else {
-                                            Color.clear
-                                        }
-                                    }
-                                )
-                        }
+                    Picker("", selection: $selectedTab) {
+                        Text("Login").tag(0)
+                        Text("Register").tag(1)
                     }
-                    .background(Color.white.opacity(0.15))
-                    .clipShape(Capsule())
-                    .padding(.horizontal, 8)
+                    .pickerStyle(.segmented)
+                    .padding(.horizontal, 16)
+                    // Email Field
                     HStack {
                         Image(systemName: "envelope")
-                            .foregroundColor(.gray)
+                            .foregroundColor(AppColors.textSecondary)
+                            .font(.system(size: 18))
                         TextField("Email Address", text: $email)
+                            .font(.system(size: 16, design: .rounded))
                             .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
+                            .textInputAutocapitalization(.never)
                             .disableAutocorrection(true)
+                            .foregroundColor(AppColors.textPrimary)
                     }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(12)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 16)
+                    .background(AppColors.cardBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(AppColors.primary.opacity(0.2), lineWidth: 1)
+                    )
+                    .shadow(color: .gray.opacity(0.1), radius: 4, x: 0, y: 2)
+                    .padding(.horizontal, 16)
                     // Password Field
                     HStack {
                         Image(systemName: "lock")
-                            .foregroundColor(.gray)
+                            .foregroundColor(AppColors.textSecondary)
+                            .font(.system(size: 18))
                         SecureField("Password", text: $password)
+                            .font(.system(size: 16, design: .rounded))
+                            .foregroundColor(AppColors.textPrimary)
                             .focused($passwordFocused)
                         Button(action: { passwordFocused.toggle() }) {
                             Image(systemName: passwordFocused ? "eye.slash" : "eye")
-                                .foregroundColor(.gray)
+                                .foregroundColor(AppColors.textSecondary)
+                                .font(.system(size: 18))
                         }
                     }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(12)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 16)
+                    .background(AppColors.cardBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(AppColors.primary.opacity(0.2), lineWidth: 1)
+                    )
+                    .shadow(color: .gray.opacity(0.1), radius: 4, x: 0, y: 2)
+                    .padding(.horizontal, 16)
                     // Remember me and Forgot password
                     HStack {
                         Button(action: { rememberMe.toggle() }) {
                             HStack(spacing: 8) {
                                 Image(systemName: rememberMe ? "checkmark.square.fill" : "square")
-                                    .foregroundColor(rememberMe ? .green : .gray)
+                                    .foregroundColor(rememberMe ? AppColors.accent : AppColors.textSecondary)
+                                    .font(.system(size: 18))
                                 Text("Remember me")
-                                    .font(.system(size: 15))
-                                    .foregroundColor(.black)
+                                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                                    .foregroundColor(AppColors.textPrimary)
                             }
                         }
                         Spacer()
@@ -113,43 +104,52 @@ struct AuthView: View {
                             // Forgot password action
                         }) {
                             Text("Forgot Password?")
-                                .font(.system(size: 15))
-                                .foregroundColor(.green)
+                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .foregroundColor(AppColors.primary)
                         }
                     }
+                    .padding(.horizontal, 16)
                     // Login Button
                     Button(action: {
-                        isLoggedIn = true // <-- This triggers navigation to MainTabView
+                        isLoggedIn = true
                     }) {
-                        Text("Login")
+                        Text(selectedTab == 0 ? "Login" : "Register")
+                            .font(.system(size: 18, weight: .semibold, design: .rounded))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 50)
-                            .background(Color(.systemGreen))
-                            .cornerRadius(25)
+                            .padding(.vertical, 16)
+                            .background(AppColors.accent)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
                     }
+                    .padding(.horizontal, 16)
                     // Or login with
                     HStack {
                         Rectangle()
                             .frame(height: 1)
-                            .foregroundColor(.gray.opacity(0.3))
+                            .foregroundColor(AppColors.textSecondary.opacity(0.3))
                         Text("Or login with")
-                            .font(.system(size: 14))
-                            .foregroundColor(.gray)
+                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                            .foregroundColor(AppColors.textSecondary)
                         Rectangle()
                             .frame(height: 1)
-                            .foregroundColor(.gray.opacity(0.3))
+                            .foregroundColor(AppColors.textSecondary.opacity(0.3))
                     }
+                    .padding(.horizontal, 16)
                     // Social buttons
                     SocialLoginView()
                 }
-                .padding()
-                .background(Color.white)
-                .cornerRadius(30)
-                .padding(.horizontal)
-                .padding(.top, 30)
+                .padding(.vertical, 24)
+                .background(AppColors.cardBackground)
+                .clipShape(RoundedRectangle(cornerRadius: 24))
+                .shadow(color: .gray.opacity(0.1), radius: 6, x: 0, y: 3)
+                .padding(.horizontal, 8)
                 Spacer()
             }
         }
     }
+}
+
+#Preview {
+    AuthView(isLoggedIn: .constant(false))
 }
