@@ -53,7 +53,11 @@ private struct SurveyListView: View {
     var body: some View {
         VStack(spacing: 18) {
             ForEach(surveys) { survey in
-                SurveyCardView(survey: survey)
+                NavigationLink {
+                    SurveyView(survey: survey)
+                } label: {
+                    OngoingSurveyCardView(survey: survey)
+                }
             }
         }
         .padding(.horizontal)
@@ -62,6 +66,32 @@ private struct SurveyListView: View {
     }
 }
 
-#Preview {
-    OngoingView()
+private struct OngoingSurveyCardView: View {
+    let survey: Survey
+    
+    var body: some View {
+        HStack {
+            Image(systemName: survey.image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+                .padding(.trailing, 12)
+                .foregroundColor(AppColors.accent)
+            
+            VStack(alignment: .leading) {
+                Text(survey.title)
+                    .font(.headline)
+                    .foregroundColor(AppColors.textPrimary)
+                Text("Progress: \(survey.progress)/\(survey.total)")
+                    .font(.subheadline)
+                    .foregroundColor(AppColors.textSecondary)
+            }
+            Spacer()
+            Image(systemName: "chevron.right")
+                .foregroundColor(AppColors.textSecondary.opacity(0.7))
+        }
+        .padding()
+        .background(AppColors.cardBackground)
+        .cornerRadius(12)
+    }
 }

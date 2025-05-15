@@ -29,7 +29,7 @@ extension Survey {
                     options: ["Baking", "Frying", "Steaming", "Raw"]
                 )
             ],
-            progress: 0,
+            progress: 2,
             total: 2
         ),
         Survey(
@@ -41,8 +41,19 @@ extension Survey {
                     options: ["Weekly", "Monthly", "Yearly", "Never"]
                 )
             ],
-            progress: 0,
+            progress: 1,
             total: 1
         )
     ]
+
+    /// Generates fake results for each question: [option: number of votes]
+    var mockResults: [[String: Int]] {
+        questions.map { question in
+            var result: [String: Int] = [:]
+            for option in question.options {
+                result[option] = Int.random(in: 5...30)
+            }
+            return result
+        }
+    }
 }
