@@ -1,7 +1,12 @@
 import SwiftUI
 
 struct SurveyCardView: View {
+    @EnvironmentObject var surveyStore: SurveyStore
     let survey: Survey
+    
+    private var state: SurveyState {
+        surveyStore.surveyStates[survey.id] ?? SurveyState()
+    }
     
     var body: some View {
         NavigationLink(destination: SurveyView(survey: survey)) {
@@ -21,12 +26,12 @@ struct SurveyCardView: View {
                         .foregroundColor(AppColors.textPrimary)
                     
                     HStack {
-                        ProgressView(value: Float(survey.progress), total: Float(survey.total))
+                        ProgressView(value: Double(state.progress), total: Double(survey.questions.count))
                             .accentColor(AppColors.accent)
                             .frame(height: 6)
                             .frame(maxWidth: 120)
                         
-                        Text("\(survey.progress)/\(survey.total)")
+                        Text(state.isCompleted ? "Completed" : "\(state.progress)/\(survey.questions.count)")
                             .font(.system(size: 14))
                             .foregroundColor(AppColors.textSecondary)
                     }

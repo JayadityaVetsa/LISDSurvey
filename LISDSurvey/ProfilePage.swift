@@ -83,8 +83,8 @@ struct ProfilePage: View {
                                         .foregroundColor(.gray)
                                         .lineLimit(1)
                                 }
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(.gray.opacity(0.5))
+//                                Image(systemName: "chevron.right")
+//                                    .foregroundColor(.gray.opacity(0.5))
                             }
                         }
 
@@ -119,30 +119,6 @@ struct ProfilePage: View {
                                 .foregroundColor(.gray)
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.gray.opacity(0.5))
-                        }
-
-                        Toggle(isOn: .constant(true)) {
-                            HStack {
-                                Image(systemName: "playpause")
-                                    .foregroundColor(.gray)
-                                Text("Background play")
-                            }
-                        }
-
-                        Toggle(isOn: .constant(false)) {
-                            HStack {
-                                Image(systemName: "wifi")
-                                    .foregroundColor(.gray)
-                                Text("Download via WiFi only")
-                            }
-                        }
-
-                        Toggle(isOn: .constant(true)) {
-                            HStack {
-                                Image(systemName: "arrow.clockwise")
-                                    .foregroundColor(.gray)
-                                Text("Autoplay")
-                            }
                         }
                     }
                 }

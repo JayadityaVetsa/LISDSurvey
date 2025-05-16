@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Tag: Identifiable, Hashable, Codable {
-    let id = UUID()
+    var id = UUID()
     let name: String
 }
 

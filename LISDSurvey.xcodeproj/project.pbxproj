@@ -17,6 +17,8 @@
 		ED6C02242DC26BBD006463A5 /* SocialLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6C02232DC26BBD006463A5 /* SocialLoginView.swift */; };
 		ED6C02262DC26CD3006463A5 /* google_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED6C02252DC26CD3006463A5 /* google_logo.png */; };
 		ED6C02282DC26D5C006463A5 /* facebook_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED6C02272DC26D5C006463A5 /* facebook_logo.png */; };
+		EDA6DCCE2DD77C1B00F35C0E /* SurveyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA6DCCD2DD77C1B00F35C0E /* SurveyHomeView.swift */; };
+		EDA6DCD02DD7858B00F35C0E /* SurveyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA6DCCF2DD7858B00F35C0E /* SurveyListView.swift */; };
 		EDA954CA2DBFBDAC00B8B7FA /* LISDSurveyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA954C92DBFBDAC00B8B7FA /* LISDSurveyApp.swift */; };
 		EDA954CC2DBFBDAC00B8B7FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA954CB2DBFBDAC00B8B7FA /* ContentView.swift */; };
 		EDA954CE2DBFBDAD00B8B7FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDA954CD2DBFBDAD00B8B7FA /* Assets.xcassets */; };
@@ -29,7 +31,6 @@
 		EDD913482DC50C970043061D /* OngoingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD913472DC50C970043061D /* OngoingView.swift */; };
 		EDD9134A2DC50CBF0043061D /* FinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD913492DC50CBF0043061D /* FinishedView.swift */; };
 		EDD9134C2DC50D180043061D /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD9134B2DC50D180043061D /* AuthView.swift */; };
-		EDD9134E2DC50EF60043061D /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD9134D2DC50EF60043061D /* MainTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		ED6C02232DC26BBD006463A5 /* SocialLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginView.swift; sourceTree = "<group>"; };
 		ED6C02252DC26CD3006463A5 /* google_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = google_logo.png; sourceTree = "<group>"; };
 		ED6C02272DC26D5C006463A5 /* facebook_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_logo.png; sourceTree = "<group>"; };
+		EDA6DCCD2DD77C1B00F35C0E /* SurveyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyHomeView.swift; sourceTree = "<group>"; };
+		EDA6DCCF2DD7858B00F35C0E /* SurveyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyListView.swift; sourceTree = "<group>"; };
 		EDA954C62DBFBDAC00B8B7FA /* LISDSurvey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LISDSurvey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDA954C92DBFBDAC00B8B7FA /* LISDSurveyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LISDSurveyApp.swift; sourceTree = "<group>"; };
 		EDA954CB2DBFBDAC00B8B7FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,7 +78,6 @@
 		EDD913472DC50C970043061D /* OngoingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingView.swift; sourceTree = "<group>"; };
 		EDD913492DC50CBF0043061D /* FinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedView.swift; sourceTree = "<group>"; };
 		EDD9134B2DC50D180043061D /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
-		EDD9134D2DC50EF60043061D /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,8 @@
 		EDA954C82DBFBDAC00B8B7FA /* LISDSurvey */ = {
 			isa = PBXGroup;
 			children = (
+				EDA6DCCF2DD7858B00F35C0E /* SurveyListView.swift */,
+				EDA6DCCD2DD77C1B00F35C0E /* SurveyHomeView.swift */,
 				ACF8C3152DD62C380059F65C /* TagSelectionView.swift */,
 				ACF8C3132DD62C170059F65C /* TagViewModel.swift */,
 				ED5629362DCA563200D375D0 /* SurveyCategoriesView.swift */,
@@ -140,7 +144,6 @@
 				ED6C02232DC26BBD006463A5 /* SocialLoginView.swift */,
 				EDD913472DC50C970043061D /* OngoingView.swift */,
 				EDD913492DC50CBF0043061D /* FinishedView.swift */,
-				EDD9134D2DC50EF60043061D /* MainTabView.swift */,
 				ED5629322DCA55E200D375D0 /* SurveyCardView.swift */,
 				ED6C02252DC26CD3006463A5 /* google_logo.png */,
 				ED6C02272DC26D5C006463A5 /* facebook_logo.png */,
@@ -308,17 +311,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED5629372DCA563200D375D0 /* SurveyCategoriesView.swift in Sources */,
+				EDA6DCCE2DD77C1B00F35C0E /* SurveyHomeView.swift in Sources */,
 				ED5629312DCA55BD00D375D0 /* SurveyModel.swift in Sources */,
 				ED6C02242DC26BBD006463A5 /* SocialLoginView.swift in Sources */,
 				ED5629332DCA55E200D375D0 /* SurveyCardView.swift in Sources */,
 				EDD9134A2DC50CBF0043061D /* FinishedView.swift in Sources */,
 				ACF8C3142DD62C210059F65C /* TagViewModel.swift in Sources */,
-				EDD9134E2DC50EF60043061D /* MainTabView.swift in Sources */,
 				ED56292F2DCA559E00D375D0 /* AppColors.swift in Sources */,
 				ED5629352DCA560B00D375D0 /* SurveyView.swift in Sources */,
 				EDA954CC2DBFBDAC00B8B7FA /* ContentView.swift in Sources */,
 				EDD913462DC509500043061D /* ProfilePage.swift in Sources */,
 				EDA954CA2DBFBDAC00B8B7FA /* LISDSurveyApp.swift in Sources */,
+				EDA6DCD02DD7858B00F35C0E /* SurveyListView.swift in Sources */,
 				EDD913482DC50C970043061D /* OngoingView.swift in Sources */,
 				EDD9134C2DC50D180043061D /* AuthView.swift in Sources */,
 				ACF8C3162DD62C410059F65C /* TagSelectionView.swift in Sources */,

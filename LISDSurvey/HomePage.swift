@@ -1,8 +1,19 @@
 import SwiftUI
 
 struct HomePage: View {
+    @EnvironmentObject var surveyStore: SurveyStore
     @State private var showProfile = false
     @State private var searchText = ""
+    
+    // Only show surveys that have not been started or completed
+    private var filteredSurveys: [Survey] {
+        surveyStore.allSurveys.filter { survey in
+            guard let state = surveyStore.surveyStates[survey.id] else {
+                return true // never started
+            }
+            return state.progress == 0 && !state.isCompleted
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -77,8 +88,8 @@ struct HomePage: View {
     private var SurveyContent: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                Header(title: "Today's Surveys", subtitle: "5 upcoming surveys")
-                SurveyCategoriesView()
+                Header(title: "Today's Surveys", subtitle: "\(filteredSurveys.count) upcoming surveys")
+                // SurveyCategoriesView() // Remove if you don't want categories
                 Header(title: "All Surveys", subtitle: nil)
                 SurveyList
             }
@@ -103,14 +114,10 @@ struct HomePage: View {
     
     private var SurveyList: some View {
         VStack(spacing: 18) {
-            ForEach(Survey.mockSurveys) { survey in
+            ForEach(filteredSurveys) { survey in
                 SurveyCardView(survey: survey)
             }
         }
         .padding()
     }
-}
-
-#Preview {
-    HomePage()
 }

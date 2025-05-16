@@ -1,10 +1,14 @@
 import SwiftUI
 
 struct FinishedView: View {
+    @EnvironmentObject var surveyStore: SurveyStore
     @State private var expandedSurveyID: UUID? = nil
     
     private var completedSurveys: [Survey] {
-        Survey.mockSurveys.filter { $0.progress == $0.total }
+        surveyStore.allSurveys.filter { survey in
+            let state = surveyStore.surveyStates[survey.id]
+            return state != nil && state!.isCompleted
+        }
     }
 
     var body: some View {
@@ -39,28 +43,8 @@ struct FinishedView: View {
     }
 }
 
-private struct HeaderView: View {
-    let title: String
-    let subtitle: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 1) {
-            Text(title)
-                .font(.system(size: 26, weight: .bold))
-                .foregroundColor(AppColors.textPrimary)
-                .padding(.horizontal)
-                .padding(.top, 24)
-
-            Text(subtitle)
-                .font(.system(size: 15))
-                .foregroundColor(AppColors.textSecondary)
-                .padding(.horizontal)
-                .padding(.top, 1)
-        }
-    }
-}
-
-private struct CompletedSurveyCardView: View {
+struct CompletedSurveyCardView: View {
+    @EnvironmentObject var surveyStore: SurveyStore
     let survey: Survey
     let isExpanded: Bool
     let onToggle: () -> Void
@@ -92,33 +76,42 @@ private struct CompletedSurveyCardView: View {
             if isExpanded {
                 VStack(alignment: .leading, spacing: 16) {
                     ForEach(Array(zip(survey.questions.indices, survey.questions)), id: \.0) { (index, question) in
-                        VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading, spacing: 12) {
                             Text(question.text)
                                 .font(.headline)
                                 .foregroundColor(AppColors.textSecondary)
+                                .padding(.bottom, 4)
 
-                            let result = survey.mockResults[index]
+                            let results = survey.mockResults[index]
+                            let total = results.values.reduce(0, +)
+                            
                             ForEach(question.options, id: \.self) { option in
-                                let count = result[option] ?? 0
-                                HStack {
+                                let count = results[option] ?? 0
+                                let percentage = total > 0 ? CGFloat(count) / CGFloat(total) : 0
+                                
+                                HStack(spacing: 12) {
                                     Text(option)
                                         .font(.subheadline)
                                         .frame(width: 100, alignment: .leading)
                                         .foregroundColor(AppColors.textPrimary)
-
+                                    
                                     GeometryReader { geo in
                                         RoundedRectangle(cornerRadius: 4)
-                                            .fill(AppColors.accent)
-                                            .frame(width: CGFloat(count) / 30 * geo.size.width, height: 10)
+                                            .fill(AppColors.accent.opacity(0.3))
+                                            .frame(width: geo.size.width * percentage, height: 20)
+                                            .overlay(
+                                                Text("\(Int(percentage * 100))%")
+                                                    .font(.system(size: 12))
+                                                    .foregroundColor(.white)
+                                                    .padding(.trailing, 4),
+                                                alignment: .trailing
+                                            )
                                     }
-                                    .frame(height: 10)
-
-                                    Text("\(count)")
-                                        .font(.caption)
-                                        .foregroundColor(AppColors.textSecondary)
+                                    .frame(height: 20)
                                 }
                             }
                         }
+                        .padding(.vertical, 8)
                     }
                 }
                 .padding(.horizontal, 12)
@@ -127,5 +120,27 @@ private struct CompletedSurveyCardView: View {
             }
         }
         .animation(.easeInOut(duration: 0.25), value: isExpanded)
+    }
+}
+
+// Update the Survey struct with realistic mock results
+extension Survey {
+    var mockResults: [[String: Int]] {
+        questions.map { question in
+            // Custom percentages based on question type
+            if question.text.contains("travel") {
+                return ["Weekly": 15, "Monthly": 20, "Yearly": 60, "Never": 5]
+            }
+            else if question.text.contains("vegetables") {
+                return ["Daily": 45, "Weekly": 30, "Occasionally": 20, "Never": 5]
+            }
+            else if question.text.contains("exercise") {
+                return ["Daily": 25, "3x/week": 40, "Weekly": 25, "Never": 10]
+            }
+            // Default case
+            return question.options.reduce(into: [:]) { dict, option in
+                dict[option] = Int.random(in: 5...30)
+            }
+        }
     }
 }
