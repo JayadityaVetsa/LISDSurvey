@@ -1,8 +1,19 @@
 import SwiftUI
+import FirebaseAuth
 
 struct ProfilePage: View {
     @Environment(\.presentationMode) var presentationMode
+    @Binding var isLoggedIn: Bool
     @StateObject private var tagViewModel = TagViewModel()
+    @State private var showLogoutConfirmation = false
+
+    private var userEmail: String {
+        Auth.auth().currentUser?.email ?? "User Email"
+    }
+
+    private var userName: String {
+        userEmail.components(separatedBy: "@").first?.capitalized ?? "User"
+    }
 
     var body: some View {
         NavigationView {
@@ -17,7 +28,7 @@ struct ProfilePage: View {
                     }
                     Spacer()
                     Button(action: {
-                        // Logout logic here
+                        showLogoutConfirmation = true
                     }) {
                         Text("Logout")
                             .font(.system(size: 16, weight: .semibold))
@@ -33,11 +44,14 @@ struct ProfilePage: View {
                         .frame(width: 88, height: 88)
                         .clipShape(Circle())
                         .background(Circle().fill(Color(.systemGray5)))
-                    Text("MME APP")
+
+                    Text(userName)
                         .font(.system(size: 22, weight: .bold))
-                    Text("mmeapp@gmail.com")
+
+                    Text(userEmail)
                         .font(.system(size: 16))
                         .foregroundColor(.gray)
+
                     Button(action: {}) {
                         Text("Edit profile")
                             .font(.system(size: 16, weight: .semibold))
@@ -83,8 +97,6 @@ struct ProfilePage: View {
                                         .foregroundColor(.gray)
                                         .lineLimit(1)
                                 }
-//                                Image(systemName: "chevron.right")
-//                                    .foregroundColor(.gray.opacity(0.5))
                             }
                         }
 
@@ -128,10 +140,25 @@ struct ProfilePage: View {
             .onAppear {
                 tagViewModel.loadTags()
             }
+            .alert(isPresented: $showLogoutConfirmation) {
+                Alert(
+                    title: Text("Sign Out"),
+                    message: Text("Are you sure you want to sign out?"),
+                    primaryButton: .destructive(Text("Sign Out")) {
+                        do {
+                            try Auth.auth().signOut()
+                            isLoggedIn = false
+                        } catch {
+                            print("❌ Sign-out error: \(error.localizedDescription)")
+                        }
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
         }
     }
 }
 
 #Preview {
-    ProfilePage()
+    ProfilePage(isLoggedIn: .constant(true))
 }

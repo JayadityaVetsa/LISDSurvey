@@ -1,12 +1,7 @@
-//
-//  TagViewModel.swift
-//  LISDSurvey
-//
-//  Created by Sai venkat Veerapaneni on 5/15/25.
-//
-
 import Foundation
 import SwiftUI
+import FirebaseFirestore
+import FirebaseAuth
 
 struct Tag: Identifiable, Hashable, Codable {
     var id = UUID()
@@ -24,8 +19,26 @@ class TagViewModel: ObservableObject {
         Tag(name: "History")
     ]
 
+    private let db = Firestore.firestore()
+
     func loadTags() {
-        // Add Firebase/UserDefaults loading logic here
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        db.collection("users").document(userID).getDocument { snapshot, error in
+            if let data = snapshot?.data(),
+               let tagNames = data["tags"] as? [String] {
+                DispatchQueue.main.async {
+                    self.selectedTags = tagNames.compactMap { name in
+                        self.allTags.first(where: { $0.name == name })
+                    }
+                }
+            }
+        }
+    }
+
+    func saveTags() {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let tagNames = selectedTags.map { $0.name }
+        db.collection("users").document(userID).setData(["tags": tagNames], merge: true)
     }
 
     func toggleTag(_ tag: Tag) {
@@ -34,6 +47,7 @@ class TagViewModel: ObservableObject {
         } else {
             selectedTags.append(tag)
         }
+        saveTags()
     }
 
     func isSelected(_ tag: Tag) -> Bool {

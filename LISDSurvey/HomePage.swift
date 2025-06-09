@@ -4,47 +4,51 @@ struct HomePage: View {
     @EnvironmentObject var surveyStore: SurveyStore
     @State private var showProfile = false
     @State private var searchText = ""
-    
-    // Only show surveys that have not been started or completed
-    private var filteredSurveys: [Survey] {
-        surveyStore.allSurveys.filter { survey in
-            guard let state = surveyStore.surveyStates[survey.id] else {
+    @Binding var isLoggedIn: Bool
+
+    private var filteredSurveys: [SurveyModel] {
+        surveyStore.availableSurveys.filter { survey in
+            guard let state = surveyStore.surveyProgressStates[survey.id] else {
                 return true // never started
             }
             return state.progress == 0 && !state.isCompleted
+        }.filter {
+            searchText.isEmpty || $0.title.localizedCaseInsensitiveContains(searchText)
         }
     }
-    
+
     var body: some View {
         NavigationStack {
             content
                 .sheet(isPresented: $showProfile) {
-                    ProfilePage()
+                    ProfilePage(isLoggedIn: $isLoggedIn)
                 }
         }
     }
-    
+
     private var content: some View {
         VStack(alignment: .leading, spacing: 0) {
-            TopBar
-            SearchBar
-            SurveyContent
+            topBar
+            searchBar
+            surveySection
         }
         .background(AppColors.background.ignoresSafeArea())
     }
-    
-    private var TopBar: some View {
+
+    private var topBar: some View {
         HStack {
-            ProfileButton
+            profileButton
             Spacer()
-            Title
+            Text("Home")
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(AppColors.textPrimary)
             Spacer()
-            NotificationIcons
+            notificationIcons
         }
         .padding()
     }
-    
-    private var ProfileButton: some View {
+
+    private var profileButton: some View {
         Button(action: { showProfile = true }) {
             ZStack {
                 Circle()
@@ -56,14 +60,8 @@ struct HomePage: View {
             }
         }
     }
-    
-    private var Title: some View {
-        Text("Home")
-            .font(.system(size: 20, weight: .semibold))
-            .foregroundColor(AppColors.textPrimary)
-    }
-    
-    private var NotificationIcons: some View {
+
+    private var notificationIcons: some View {
         HStack(spacing: 18) {
             Image(systemName: "chart.bar")
             Image(systemName: "bell")
@@ -71,8 +69,8 @@ struct HomePage: View {
         .font(.system(size: 18))
         .foregroundColor(AppColors.textSecondary)
     }
-    
-    private var SearchBar: some View {
+
+    private var searchBar: some View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(AppColors.textSecondary)
@@ -84,24 +82,23 @@ struct HomePage: View {
         .cornerRadius(12)
         .padding(.horizontal)
     }
-    
-    private var SurveyContent: some View {
+
+    private var surveySection: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                Header(title: "Today's Surveys", subtitle: "\(filteredSurveys.count) upcoming surveys")
-                // SurveyCategoriesView() // Remove if you don't want categories
-                Header(title: "All Surveys", subtitle: nil)
-                SurveyList
+                header(title: "Today's Surveys", subtitle: "\(filteredSurveys.count) upcoming surveys")
+                header(title: "All Surveys", subtitle: nil)
+                surveyList
             }
         }
     }
-    
-    private func Header(title: String, subtitle: String?) -> some View {
+
+    private func header(title: String, subtitle: String?) -> some View {
         VStack(alignment: .leading, spacing: 1) {
             Text(title)
                 .font(.system(size: 26, weight: .bold))
                 .padding(.horizontal)
-            
+
             if let subtitle = subtitle {
                 Text(subtitle)
                     .font(.system(size: 15))
@@ -111,11 +108,14 @@ struct HomePage: View {
         }
         .padding(.top, 16)
     }
-    
-    private var SurveyList: some View {
+
+    private var surveyList: some View {
         VStack(spacing: 18) {
             ForEach(filteredSurveys) { survey in
-                SurveyCardView(survey: survey)
+                let progress = surveyStore.surveyProgressStates[survey.id] ?? SurveyProgress()
+                NavigationLink(destination: SurveyView(survey: survey)) {
+                    SurveyCardView(survey: survey, progress: progress)
+                }
             }
         }
         .padding()

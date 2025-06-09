@@ -1,15 +1,26 @@
 import SwiftUI
+import FirebaseAuth
 
 struct OngoingView: View {
     @EnvironmentObject var surveyStore: SurveyStore
-    
-    private var ongoingSurveys: [Survey] {
-        surveyStore.allSurveys.filter { survey in
-            let state = surveyStore.surveyStates[survey.id]
-            return state != nil && state!.progress > 0 && !state!.isCompleted
+
+    private var currentUserID: String? {
+        Auth.auth().currentUser?.uid
+    }
+
+    private var ongoingSurveys: [(SurveyModel, SurveyProgress)] {
+        guard let uid = currentUserID,
+              let completions = surveyStore.userSurveyCompletion[uid] else { return [] }
+
+        return completions.compactMap { (surveyID, progress) in
+            guard !progress.isCompleted, progress.progress > 0,
+                  let survey = surveyStore.availableSurveys.first(where: { $0.id == surveyID }) else {
+                return nil
+            }
+            return (survey, progress)
         }
     }
-    
+
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 0) {
@@ -17,10 +28,18 @@ struct OngoingView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         HeaderView(
                             title: "Ongoing Surveys",
-                            subtitle: "\(ongoingSurveys.count) surveys in progress"
+                            subtitle: "You have \(ongoingSurveys.count) surveys in progress"
                         )
-                        
-                        SurveyListView(surveys: ongoingSurveys)
+
+                        VStack(spacing: 18) {
+                            ForEach(ongoingSurveys, id: \.0.id) { (survey, progress) in
+                                NavigationLink(destination: SurveyView(survey: survey)) {
+                                    OngoingSurveyCardView(survey: survey, progress: progress)
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                        .padding(.top, 8)
                     }
                 }
             }
@@ -30,13 +49,9 @@ struct OngoingView: View {
 }
 
 struct OngoingSurveyCardView: View {
-    @EnvironmentObject var surveyStore: SurveyStore
-    let survey: Survey
-    
-    private var state: SurveyState {
-        surveyStore.surveyStates[survey.id] ?? SurveyState()
-    }
-    
+    let survey: SurveyModel
+    let progress: SurveyProgress
+
     var body: some View {
         HStack {
             Image(systemName: survey.image)
@@ -45,12 +60,12 @@ struct OngoingSurveyCardView: View {
                 .frame(width: 40, height: 40)
                 .padding(.trailing, 12)
                 .foregroundColor(AppColors.accent)
-            
+
             VStack(alignment: .leading) {
                 Text(survey.title)
                     .font(.headline)
                     .foregroundColor(AppColors.textPrimary)
-                Text("Progress: \(state.progress)/\(survey.questions.count)")
+                Text("Progress: \(progress.progress)/\(survey.questions.count)")
                     .font(.subheadline)
                     .foregroundColor(AppColors.textSecondary)
             }
@@ -63,3 +78,4 @@ struct OngoingSurveyCardView: View {
         .cornerRadius(12)
     }
 }
+
