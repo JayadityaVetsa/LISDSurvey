@@ -1,40 +1,41 @@
 import SwiftUI
 import FirebaseAuth
+import Combine
 
 struct ContentView: View {
-    @State private var isLoggedIn: Bool = Auth.auth().currentUser != nil
+    @State private var isLoggedIn = false
+    @StateObject private var surveyStore = SurveyStore()
 
     var body: some View {
         Group {
             if isLoggedIn {
                 TabView {
                     HomePage(isLoggedIn: $isLoggedIn)
-                        .tabItem {
-                            Label("Home", systemImage: "house")
-                        }
+                        .tabItem { Label("Home", systemImage: "house") }
 
                     OngoingView()
-                        .tabItem {
-                            Label("Ongoing", systemImage: "chart.bar")
-                        }
+                        .tabItem { Label("Ongoing", systemImage: "chart.bar") }
 
                     FinishedView()
-                        .tabItem {
-                            Label("Completed", systemImage: "checkmark")
-                        }
+                        .tabItem { Label("Completed", systemImage: "checkmark") }
 
                     ProfilePage(isLoggedIn: $isLoggedIn)
-                        .tabItem {
-                            Label("Profile", systemImage: "person.circle")
-                        }
+                        .tabItem { Label("Profile", systemImage: "person.circle") }
                 }
+                .environmentObject(surveyStore)
             } else {
                 AuthView(isLoggedIn: $isLoggedIn)
+                    .environmentObject(surveyStore)
             }
         }
         .onAppear {
-            // Extra safety net if Auth state changes while app is active
+            isLoggedIn = Auth.auth().currentUser != nil
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .authStateDidChange)) { _ in
             isLoggedIn = Auth.auth().currentUser != nil
         }
     }
+}
+extension Notification.Name {
+    static let authStateDidChange = Notification.Name("authStateDidChange")
 }

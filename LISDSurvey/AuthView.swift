@@ -14,6 +14,7 @@ struct AuthView: View {
     @State private var showAlert = false
     @State private var isLoading = false
     @FocusState private var passwordFocused: Bool
+    @EnvironmentObject var surveyStore: SurveyStore
 
     var body: some View {
         ZStack {
@@ -177,9 +178,9 @@ struct AuthView: View {
             }
         }
         .onAppear {
-            // If the user is already authenticated, bypass AuthView
             if Auth.auth().currentUser != nil {
                 isLoggedIn = true
+                surveyStore.initializeUserData()
             }
         }
         .alert(isPresented: $showAlert) {
@@ -220,6 +221,7 @@ struct AuthView: View {
                     }
                     showAlert = true
                 } else {
+                    surveyStore.initializeUserData()
                     isLoggedIn = true
                 }
             }
@@ -240,6 +242,7 @@ struct AuthView: View {
                     }
                     showAlert = true
                 } else {
+                    surveyStore.initializeUserData()
                     isLoggedIn = true
                 }
             }
@@ -290,6 +293,7 @@ struct AuthView: View {
                     errorMessage = error.localizedDescription
                     showAlert = true
                 } else {
+                    surveyStore.initializeUserData()
                     isLoggedIn = true
                 }
             }
@@ -299,4 +303,5 @@ struct AuthView: View {
 
 #Preview {
     AuthView(isLoggedIn: .constant(false))
+        .environmentObject(SurveyStore())
 }

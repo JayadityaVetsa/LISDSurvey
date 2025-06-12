@@ -1,14 +1,22 @@
+// SurveyCardView.swift
 import SwiftUI
 
 struct SurveyCardView: View {
     let survey: SurveyModel
     let progress: SurveyProgress
+    @EnvironmentObject var surveyStore: SurveyStore
 
     var body: some View {
         NavigationLink(destination: SurveyView(survey: survey)) {
             HStack(spacing: 16) {
                 icon
-                infoSection
+                VStack(alignment: .leading, spacing: 8) {
+                    infoSection
+                    dateTimeSection
+                    CountdownView(endTime: survey.endTime) {
+                        surveyStore.markSurveyAsExpired(surveyId: survey.id)
+                    }
+                }
                 Spacer()
             }
             .padding()
@@ -46,6 +54,17 @@ struct SurveyCardView: View {
                     .font(.system(size: 14))
                     .foregroundColor(AppColors.textSecondary)
             }
+        }
+    }
+
+    private var dateTimeSection: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("Starts: \(survey.startTime.formatted(date: .abbreviated, time: .shortened))")
+                .font(.caption)
+                .foregroundColor(.gray)
+            Text("Ends: \(survey.endTime.formatted(date: .abbreviated, time: .shortened))")
+                .font(.caption)
+                .foregroundColor(.gray)
         }
     }
 }

@@ -4,16 +4,10 @@ import FirebaseAuth
 struct OngoingView: View {
     @EnvironmentObject var surveyStore: SurveyStore
 
-    private var currentUserID: String? {
-        Auth.auth().currentUser?.uid
-    }
-
     private var ongoingSurveys: [(SurveyModel, SurveyProgress)] {
-        guard let uid = currentUserID,
-              let completions = surveyStore.userSurveyCompletion[uid] else { return [] }
-
-        return completions.compactMap { (surveyID, progress) in
-            guard !progress.isCompleted, progress.progress > 0,
+        surveyStore.surveyProgressStates.compactMap { (surveyID, progress) in
+            guard !progress.isCompleted,
+                  progress.selectedAnswers.count > 0,
                   let survey = surveyStore.availableSurveys.first(where: { $0.id == surveyID }) else {
                 return nil
             }
@@ -23,25 +17,33 @@ struct OngoingView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 0) {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        HeaderView(
-                            title: "Ongoing Surveys",
-                            subtitle: "You have \(ongoingSurveys.count) surveys in progress"
-                        )
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    OngoingHeaderView(
+                        title: "Ongoing Surveys",
+                        subtitle: "You have \(ongoingSurveys.count) surveys in progress"
+                    )
+                    .padding(.horizontal)
 
+                    if ongoingSurveys.isEmpty {
+                        Text("No surveys in progress.")
+                            .font(.subheadline)
+                            .foregroundColor(AppColors.textSecondary)
+                            .padding()
+                    } else {
                         VStack(spacing: 18) {
                             ForEach(ongoingSurveys, id: \.0.id) { (survey, progress) in
                                 NavigationLink(destination: SurveyView(survey: survey)) {
                                     OngoingSurveyCardView(survey: survey, progress: progress)
                                 }
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }
                         .padding(.horizontal)
-                        .padding(.top, 8)
+                        .padding(.bottom)
                     }
                 }
+                .padding(.top)
             }
             .background(AppColors.background.ignoresSafeArea())
         }
@@ -65,11 +67,14 @@ struct OngoingSurveyCardView: View {
                 Text(survey.title)
                     .font(.headline)
                     .foregroundColor(AppColors.textPrimary)
-                Text("Progress: \(progress.progress)/\(survey.questions.count)")
+
+                Text("Progress: \(progress.selectedAnswers.count)/\(survey.questions.count)")
                     .font(.subheadline)
                     .foregroundColor(AppColors.textSecondary)
             }
+
             Spacer()
+
             Image(systemName: "chevron.right")
                 .foregroundColor(AppColors.textSecondary.opacity(0.7))
         }
@@ -79,3 +84,20 @@ struct OngoingSurveyCardView: View {
     }
 }
 
+struct OngoingHeaderView: View {
+    let title: String
+    let subtitle: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(AppColors.textPrimary)
+
+            Text(subtitle)
+                .font(.subheadline)
+                .foregroundColor(AppColors.textSecondary)
+        }
+    }
+}

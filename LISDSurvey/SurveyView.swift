@@ -1,6 +1,6 @@
+// SurveyView.swift
 import SwiftUI
 import FirebaseAuth
-import FirebaseFirestore
 
 struct SurveyView: View {
     @Environment(\.dismiss) var dismiss
@@ -9,39 +9,107 @@ struct SurveyView: View {
     let survey: SurveyModel
 
     @State private var hasWatchedVideo = false
-    @State private var selectedAnswer: String?
-
-    private var currentUserID: String? {
-        Auth.auth().currentUser?.uid
-    }
+    @State private var selectedAnswer: String = ""
+    @State private var timerText: String = ""
+    @State private var timer: Timer?
+    @State private var hasExpired = false
 
     private var currentProgress: SurveyProgress {
         surveyStore.surveyProgressStates[survey.id] ?? SurveyProgress()
     }
 
+    private func updateTimerText() {
+        let now = Date()
+        if now < survey.startTime {
+            timerText = "Survey starts at \(formattedDate(survey.startTime))"
+        } else if now > survey.endTime {
+            timerText = "Survey ended at \(formattedDate(survey.endTime))"
+            hasExpired = true
+            timer?.invalidate()
+            surveyStore.markSurveyAsExpired(surveyId: survey.id)
+        } else {
+            let remaining = survey.endTime.timeIntervalSince(now)
+            let minutes = Int(remaining) / 60
+            let seconds = Int(remaining) % 60
+            timerText = "Time left: \(minutes)m \(seconds)s"
+        }
+    }
+
+    private func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        formatter.timeZone = .current
+        return formatter.string(from: date)
+    }
+
     var body: some View {
-        VStack(spacing: 0) {
-            if !hasWatchedVideo {
-                VideoPlaceholderView(hasWatchedVideo: $hasWatchedVideo)
-            } else {
-                ProgressHeader
-                    .padding(.bottom)
+        if surveyStore.completedSurveyIds.contains(survey.id) || currentProgress.isCompleted {
+            VStack {
+                Text("You've already completed this survey.")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .padding()
 
-                QuestionView
-                    .padding(.horizontal)
-
-                Spacer()
-
-                NavigationControls
+                Image(systemName: "checkmark.circle.fill")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(.green)
                     .padding()
             }
+            .navigationTitle(survey.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .background(AppColors.background.ignoresSafeArea())
+        } else if hasExpired {
+            VStack(spacing: 20) {
+                Text("⏰ Survey Time Expired")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .padding(.top)
+                Text("You didn’t complete this survey in time, but you can still view the results.")
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                Image(systemName: "clock.arrow.circlepath")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(.orange)
+            }
+            .padding()
+            .navigationTitle(survey.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .background(AppColors.background.ignoresSafeArea())
+        } else {
+            VStack(spacing: 0) {
+                if !hasWatchedVideo {
+                    VideoPlaceholderView(hasWatchedVideo: $hasWatchedVideo)
+                } else {
+                    ProgressHeader
+                    Text(timerText)
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                        .padding(.bottom, 4)
+                    QuestionView
+                    Spacer()
+                    NavigationControls
+                }
+            }
+            .onAppear {
+                selectedAnswer = currentProgress.selectedAnswers[currentProgress.currentQuestionIndex] ?? ""
+                    DispatchQueue.main.async {
+                        updateTimerText()
+                    }
+                    timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                        updateTimerText()
+                    }
+            }
+            .onDisappear {
+                timer?.invalidate()
+                timer = nil
+            }
+            .navigationTitle(survey.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .background(AppColors.background.ignoresSafeArea())
         }
-        .onAppear {
-            selectedAnswer = currentProgress.selectedAnswers[currentProgress.currentQuestionIndex]
-        }
-        .navigationTitle(survey.title)
-        .navigationBarTitleDisplayMode(.inline)
-        .background(AppColors.background.ignoresSafeArea())
     }
 
     private var ProgressHeader: some View {
@@ -61,15 +129,45 @@ struct SurveyView: View {
     }
 
     private var QuestionView: some View {
-        VStack(alignment: .leading, spacing: 25) {
-            Text(survey.questions[currentProgress.currentQuestionIndex].text)
-                .font(.title2)
-                .fontWeight(.bold)
-
-            ForEach(survey.questions[currentProgress.currentQuestionIndex].options, id: \.self) { option in
-                AnswerOption(option: option)
-            }
+        let questionIndex = currentProgress.currentQuestionIndex
+        guard survey.questions.indices.contains(questionIndex) else {
+            return AnyView(Text("Invalid question index").padding())
         }
+
+        let question = survey.questions[questionIndex]
+
+        return AnyView(
+            VStack(alignment: .leading, spacing: 25) {
+                Text(question.text)
+                    .font(.title2)
+                    .fontWeight(.bold)
+
+                Group {
+                    if question.type == .multipleChoice {
+                        ForEach(question.options, id: \ .self) { option in
+                            AnswerOption(option: option)
+                        }
+                    } else if question.type == .freeResponse {
+                        TextEditor(text: Binding(
+                            get: { selectedAnswer },
+                            set: {
+                                selectedAnswer = $0
+                                var updated = currentProgress
+                                updated.selectedAnswers[updated.currentQuestionIndex] = $0
+                                surveyStore.surveyProgressStates[survey.id] = updated
+                                surveyStore.saveProgress(surveyId: survey.id, progress: updated)
+                            }
+                        ))
+                        .frame(height: 150)
+                        .padding()
+                        .background(AppColors.cardBackground)
+                        .cornerRadius(12)
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(AppColors.primary.opacity(0.2), lineWidth: 1))
+                    }
+                }
+            }
+            .padding(.horizontal)
+        )
     }
 
     private func AnswerOption(option: String) -> some View {
@@ -78,7 +176,7 @@ struct SurveyView: View {
             var updated = currentProgress
             updated.selectedAnswers[updated.currentQuestionIndex] = option
             surveyStore.surveyProgressStates[survey.id] = updated
-            surveyStore.persistProgress()
+            surveyStore.saveProgress(surveyId: survey.id, progress: updated)
         } label: {
             HStack {
                 Text(option)
@@ -90,14 +188,8 @@ struct SurveyView: View {
                 }
             }
             .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(selectedAnswer == option ? AppColors.accent : AppColors.cardBackground)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(AppColors.primary.opacity(0.2), lineWidth: 1)
-            )
+            .background(RoundedRectangle(cornerRadius: 12).fill(selectedAnswer == option ? AppColors.accent : AppColors.cardBackground))
+            .overlay(RoundedRectangle(cornerRadius: 12).stroke(AppColors.primary.opacity(0.2), lineWidth: 1))
         }
     }
 
@@ -107,9 +199,9 @@ struct SurveyView: View {
                 Button("Previous") {
                     var updated = currentProgress
                     updated.currentQuestionIndex -= 1
-                    selectedAnswer = updated.selectedAnswers[updated.currentQuestionIndex]
+                    selectedAnswer = updated.selectedAnswers[updated.currentQuestionIndex] ?? ""
                     surveyStore.surveyProgressStates[survey.id] = updated
-                    surveyStore.persistProgress()
+                    surveyStore.saveProgress(surveyId: survey.id, progress: updated)
                 }
                 .buttonStyle(SurveyButtonStyle(backgroundColor: AppColors.primary))
             }
@@ -120,60 +212,24 @@ struct SurveyView: View {
                 Button("Next") {
                     var updated = currentProgress
                     updated.currentQuestionIndex += 1
-                    selectedAnswer = updated.selectedAnswers[updated.currentQuestionIndex]
+                    selectedAnswer = updated.selectedAnswers[updated.currentQuestionIndex] ?? ""
                     surveyStore.surveyProgressStates[survey.id] = updated
-                    surveyStore.persistProgress()
+                    surveyStore.saveProgress(surveyId: survey.id, progress: updated)
                 }
                 .buttonStyle(SurveyButtonStyle(backgroundColor: AppColors.accent))
             } else {
                 Button("Submit") {
-                    var updated = currentProgress
-                    updated.isCompleted = true
-                    surveyStore.surveyProgressStates[survey.id] = updated
-                    surveyStore.persistProgress()
-                    submitToFirestore(updated)
+                    let finalProgress = currentProgress
+                    surveyStore.submitSurvey(surveyId: survey.id, answers: finalProgress.selectedAnswers)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        surveyStore.loadSurveyProgress()
+                    }
                     dismiss()
                 }
                 .buttonStyle(SurveyButtonStyle(backgroundColor: AppColors.accent))
             }
         }
-    }
-
-    private func submitToFirestore(_ progress: SurveyProgress) {
-        guard let userId = currentUserID else { return }
-        let db = Firestore.firestore()
-
-        db.collection("userCompletions")
-            .document(userId)
-            .collection("surveys")
-            .document(survey.id.uuidString)
-            .setData([
-                "isCompleted": progress.isCompleted,
-                "selectedAnswers": progress.selectedAnswers.mapKeys { "\($0)" }
-            ]) { error in
-                if let error = error {
-                    print("Error saving userCompletions: \(error.localizedDescription)")
-                }
-            }
-
-        let surveyRef = db.collection("surveyResponses").document(survey.id.uuidString)
-        for (index, answer) in progress.selectedAnswers {
-            surveyRef
-                .collection("questions")
-                .document("\(index)")
-                .collection("answers")
-                .addDocument(data: [
-                    "option": answer,
-                    "userId": userId,
-                    "timestamp": Timestamp()
-                ]) { error in
-                    if let error = error {
-                        print("Error adding response: \(error.localizedDescription)")
-                    }
-                }
-        }
-
-        surveyStore.logUserCompletion(userId: userId, surveyId: survey.id, progress: progress)
+        .padding()
     }
 }
 
@@ -224,11 +280,5 @@ struct VideoPlaceholderView: View {
             .padding(.horizontal)
         }
         .padding()
-    }
-}
-
-extension Dictionary where Key == Int {
-    func mapKeys<T: Hashable>(_ transform: (Key) -> T) -> [T: Value] {
-        Dictionary<T, Value>(uniqueKeysWithValues: self.map { (transform($0.key), $0.value) })
     }
 }

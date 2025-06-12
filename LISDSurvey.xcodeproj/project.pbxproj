@@ -34,14 +34,22 @@
 		AC0D3DC42DF21B92008FF555 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AC0D3DC32DF21B92008FF555 /* FirebaseStorage */; };
 		AC0D3DC62DF21B92008FF555 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = AC0D3DC52DF21B92008FF555 /* FirebaseStorageCombine-Community */; };
 		AC0D3DC82DF21B92008FF555 /* FirebaseVertexAI in Frameworks */ = {isa = PBXBuildFile; productRef = AC0D3DC72DF21B92008FF555 /* FirebaseVertexAI */; };
-		AC0D3DD82DF23552008FF555 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC0D3DD72DF23552008FF555 /* GoogleService-Info.plist */; };
-		AC0D3DD92DF23552008FF555 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC0D3DD72DF23552008FF555 /* GoogleService-Info.plist */; };
-		AC0D3DDA2DF23552008FF555 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC0D3DD72DF23552008FF555 /* GoogleService-Info.plist */; };
 		AC0D3DDD2DF375B6008FF555 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = AC0D3DDC2DF375B6008FF555 /* GoogleSignIn */; };
 		AC0D3DDF2DF375B6008FF555 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AC0D3DDE2DF375B6008FF555 /* GoogleSignInSwift */; };
 		ACEAA2712DF4D5B7007ED585 /* SurveyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA2702DF4D5B2007ED585 /* SurveyStore.swift */; };
 		ACEAA2732DF4DAFB007ED585 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA2722DF4DAF7007ED585 /* Survey.swift */; };
 		ACEAA2772DF4EF13007ED585 /* SurveyResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA2762DF4EF09007ED585 /* SurveyResultsView.swift */; };
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+		ACEAA2812DFB4FE4007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA2802DFB4FE4007ED585 /* GoogleService-Info.plist */; };
+=======
+		ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */; };
+		ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA27E2DFB340F007ED585 /* CountdownView.swift */; };
+>>>>>>> Stashed changes
+=======
+		ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */; };
+		ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA27E2DFB340F007ED585 /* CountdownView.swift */; };
+>>>>>>> Stashed changes
 		ACF8C3142DD62C210059F65C /* TagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF8C3132DD62C170059F65C /* TagViewModel.swift */; };
 		ACF8C3162DD62C410059F65C /* TagSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF8C3152DD62C380059F65C /* TagSelectionView.swift */; };
 		ED56292F2DCA559E00D375D0 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED56292E2DCA559E00D375D0 /* AppColors.swift */; };
@@ -86,11 +94,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AC0D3DD72DF23552008FF555 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC0D3DE02DF379AA008FF555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ACEAA2702DF4D5B2007ED585 /* SurveyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyStore.swift; sourceTree = "<group>"; };
 		ACEAA2722DF4DAF7007ED585 /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		ACEAA2762DF4EF09007ED585 /* SurveyResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyResultsView.swift; sourceTree = "<group>"; };
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+		ACEAA2802DFB4FE4007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+=======
+		ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ACEAA27E2DFB340F007ED585 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
+=======
+		ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ACEAA27E2DFB340F007ED585 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 		ACF8C3132DD62C170059F65C /* TagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewModel.swift; sourceTree = "<group>"; };
 		ACF8C3152DD62C380059F65C /* TagSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSelectionView.swift; sourceTree = "<group>"; };
 		ED56292E2DCA559E00D375D0 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
@@ -207,6 +225,7 @@
 				ED5629342DCA560B00D375D0 /* SurveyView.swift */,
 				ACEAA2702DF4D5B2007ED585 /* SurveyStore.swift */,
 				ACEAA2722DF4DAF7007ED585 /* Survey.swift */,
+				ACEAA27E2DFB340F007ED585 /* CountdownView.swift */,
 				ED5629302DCA55BD00D375D0 /* SurveyModel.swift */,
 				ED56292E2DCA559E00D375D0 /* AppColors.swift */,
 				EDD9134B2DC50D180043061D /* AuthView.swift */,
@@ -218,10 +237,18 @@
 				EDD913472DC50C970043061D /* OngoingView.swift */,
 				EDD913492DC50CBF0043061D /* FinishedView.swift */,
 				ED5629322DCA55E200D375D0 /* SurveyCardView.swift */,
-				AC0D3DD72DF23552008FF555 /* GoogleService-Info.plist */,
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+				ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */,
+>>>>>>> Stashed changes
+=======
+				ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */,
+>>>>>>> Stashed changes
 				ED6C02252DC26CD3006463A5 /* google_logo.png */,
 				ED6C02272DC26D5C006463A5 /* facebook_logo.png */,
 				EDA954CD2DBFBDAD00B8B7FA /* Assets.xcassets */,
+				ACEAA2802DFB4FE4007ED585 /* GoogleService-Info.plist */,
 				EDA954CF2DBFBDAD00B8B7FA /* Preview Content */,
 			);
 			path = LISDSurvey;
@@ -362,7 +389,15 @@
 			files = (
 				EDA954D12DBFBDAD00B8B7FA /* Preview Assets.xcassets in Resources */,
 				ED6C02262DC26CD3006463A5 /* google_logo.png in Resources */,
-				AC0D3DD82DF23552008FF555 /* GoogleService-Info.plist in Resources */,
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+				ACEAA2812DFB4FE4007ED585 /* GoogleService-Info.plist in Resources */,
+=======
+				ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */,
+>>>>>>> Stashed changes
+=======
+				ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */,
+>>>>>>> Stashed changes
 				ED6C02282DC26D5C006463A5 /* facebook_logo.png in Resources */,
 				EDA954CE2DBFBDAD00B8B7FA /* Assets.xcassets in Resources */,
 			);
@@ -372,7 +407,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC0D3DD92DF23552008FF555 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +414,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC0D3DDA2DF23552008FF555 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +427,7 @@
 				ED5629372DCA563200D375D0 /* SurveyCategoriesView.swift in Sources */,
 				EDA6DCCE2DD77C1B00F35C0E /* SurveyHomeView.swift in Sources */,
 				ED5629312DCA55BD00D375D0 /* SurveyModel.swift in Sources */,
+				ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */,
 				ED6C02242DC26BBD006463A5 /* SocialLoginView.swift in Sources */,
 				ED5629332DCA55E200D375D0 /* SurveyCardView.swift in Sources */,
 				EDD9134A2DC50CBF0043061D /* FinishedView.swift in Sources */,
