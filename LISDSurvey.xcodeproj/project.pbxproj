@@ -41,9 +41,14 @@
 		ACEAA2772DF4EF13007ED585 /* SurveyResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA2762DF4EF09007ED585 /* SurveyResultsView.swift */; };
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */; };
 ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA27E2DFB340F007ED585 /* CountdownView.swift */; };
 
+=======
+		ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */; };
+		ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA27E2DFB340F007ED585 /* CountdownView.swift */; };
+>>>>>>> Stashed changes
 =======
 		ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */; };
 		ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA27E2DFB340F007ED585 /* CountdownView.swift */; };
@@ -103,7 +108,12 @@ ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildF
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 		ACEAA2802DFB4FE4007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+=======
+		ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ACEAA27E2DFB340F007ED585 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 =======
 		ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ACEAA27E2DFB340F007ED585 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
@@ -247,6 +257,10 @@ ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildF
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+				ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */,
+>>>>>>> Stashed changes
 =======
 				ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */,
 >>>>>>> Stashed changes
@@ -403,7 +417,11 @@ ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildF
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 				ACEAA2812DFB4FE4007ED585 /* GoogleService-Info.plist in Resources */,
+=======
+				ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */,
+>>>>>>> Stashed changes
 =======
 				ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */,
 >>>>>>> Stashed changes
