@@ -39,8 +39,29 @@
 		ACEAA2712DF4D5B7007ED585 /* SurveyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA2702DF4D5B2007ED585 /* SurveyStore.swift */; };
 		ACEAA2732DF4DAFB007ED585 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA2722DF4DAF7007ED585 /* Survey.swift */; };
 		ACEAA2772DF4EF13007ED585 /* SurveyResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA2762DF4EF09007ED585 /* SurveyResultsView.swift */; };
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */; };
+ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA27E2DFB340F007ED585 /* CountdownView.swift */; };
+
+=======
 		ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */; };
 		ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA27E2DFB340F007ED585 /* CountdownView.swift */; };
+>>>>>>> Stashed changes
+=======
+		ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */; };
+		ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA27E2DFB340F007ED585 /* CountdownView.swift */; };
+>>>>>>> Stashed changes
+=======
+		ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */; };
+		ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA27E2DFB340F007ED585 /* CountdownView.swift */; };
+>>>>>>> Stashed changes
+=======
+		ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */; };
+		ACEAA27F2DFB3416007ED585 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEAA27E2DFB340F007ED585 /* CountdownView.swift */; };
+>>>>>>> Stashed changes
 		ACF8C3142DD62C210059F65C /* TagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF8C3132DD62C170059F65C /* TagViewModel.swift */; };
 		ACF8C3162DD62C410059F65C /* TagSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF8C3152DD62C380059F65C /* TagSelectionView.swift */; };
 		ED56292F2DCA559E00D375D0 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED56292E2DCA559E00D375D0 /* AppColors.swift */; };
@@ -89,8 +110,32 @@
 		ACEAA2702DF4D5B2007ED585 /* SurveyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyStore.swift; sourceTree = "<group>"; };
 		ACEAA2722DF4DAF7007ED585 /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		ACEAA2762DF4EF09007ED585 /* SurveyResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyResultsView.swift; sourceTree = "<group>"; };
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+		ACEAA2802DFB4FE4007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+=======
 		ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ACEAA27E2DFB340F007ED585 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
+=======
+		ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ACEAA27E2DFB340F007ED585 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
+=======
+		ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ACEAA27E2DFB340F007ED585 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
+=======
+		ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ACEAA27E2DFB340F007ED585 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
+=======
+		ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ACEAA27E2DFB340F007ED585 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 		ACF8C3132DD62C170059F65C /* TagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewModel.swift; sourceTree = "<group>"; };
 		ACF8C3152DD62C380059F65C /* TagSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSelectionView.swift; sourceTree = "<group>"; };
 		ED56292E2DCA559E00D375D0 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
@@ -219,10 +264,30 @@
 				EDD913472DC50C970043061D /* OngoingView.swift */,
 				EDD913492DC50CBF0043061D /* FinishedView.swift */,
 				ED5629322DCA55E200D375D0 /* SurveyCardView.swift */,
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
 				ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */,
+>>>>>>> Stashed changes
+=======
+				ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */,
+>>>>>>> Stashed changes
+=======
+				ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */,
+>>>>>>> Stashed changes
+=======
+				ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */,
+>>>>>>> Stashed changes
+=======
+				ACEAA27A2DFA106A007ED585 /* GoogleService-Info.plist */,
+>>>>>>> Stashed changes
 				ED6C02252DC26CD3006463A5 /* google_logo.png */,
 				ED6C02272DC26D5C006463A5 /* facebook_logo.png */,
 				EDA954CD2DBFBDAD00B8B7FA /* Assets.xcassets */,
+				ACEAA2802DFB4FE4007ED585 /* GoogleService-Info.plist */,
 				EDA954CF2DBFBDAD00B8B7FA /* Preview Content */,
 			);
 			path = LISDSurvey;
@@ -363,7 +428,27 @@
 			files = (
 				EDA954D12DBFBDAD00B8B7FA /* Preview Assets.xcassets in Resources */,
 				ED6C02262DC26CD3006463A5 /* google_logo.png in Resources */,
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+				ACEAA2812DFB4FE4007ED585 /* GoogleService-Info.plist in Resources */,
+=======
 				ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */,
+>>>>>>> Stashed changes
+=======
+				ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */,
+>>>>>>> Stashed changes
+=======
+				ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */,
+>>>>>>> Stashed changes
+=======
+				ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */,
+>>>>>>> Stashed changes
+=======
+				ACEAA27B2DFA106A007ED585 /* GoogleService-Info.plist in Resources */,
+>>>>>>> Stashed changes
 				ED6C02282DC26D5C006463A5 /* facebook_logo.png in Resources */,
 				EDA954CE2DBFBDAD00B8B7FA /* Assets.xcassets in Resources */,
 			);

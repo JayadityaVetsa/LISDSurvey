@@ -1,9 +1,12 @@
-// SurveyCardView.swift
+// SurveyCardView.swift – combines SurveyCardView + revamped CountdownView
+// Uses TimelineView for an immediate and efficient countdown refresh.
+
 import SwiftUI
 
 struct SurveyCardView: View {
     let survey: SurveyModel
     let progress: SurveyProgress
+
     @EnvironmentObject var surveyStore: SurveyStore
 
     var body: some View {
@@ -26,6 +29,8 @@ struct SurveyCardView: View {
         }
         .buttonStyle(PlainButtonStyle())
     }
+
+    // MARK: – Sub‑views
 
     private var icon: some View {
         Image(systemName: survey.image)
@@ -60,11 +65,10 @@ struct SurveyCardView: View {
     private var dateTimeSection: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text("Starts: \(survey.startTime.formatted(date: .abbreviated, time: .shortened))")
-                .font(.caption)
-                .foregroundColor(.gray)
+                .font(.caption).foregroundColor(.gray)
             Text("Ends: \(survey.endTime.formatted(date: .abbreviated, time: .shortened))")
-                .font(.caption)
-                .foregroundColor(.gray)
+                .font(.caption).foregroundColor(.gray)
         }
     }
 }
+

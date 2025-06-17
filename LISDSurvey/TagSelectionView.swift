@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TagSelectionView: View {
     @ObservedObject var viewModel: TagViewModel
+    @EnvironmentObject var surveyStore: SurveyStore
 
     var body: some View {
         List(viewModel.allTags) { tag in
@@ -26,5 +27,9 @@ struct TagSelectionView: View {
             }
         }
         .navigationTitle("Select Tags")
+        .onAppear {
+            viewModel.surveyStore = surveyStore
+            viewModel.loadTags()
+        }
     }
 }

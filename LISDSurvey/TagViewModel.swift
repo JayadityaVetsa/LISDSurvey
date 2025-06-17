@@ -12,14 +12,32 @@ class TagViewModel: ObservableObject {
     @Published var selectedTags: [Tag] = []
 
     let allTags: [Tag] = [
-        Tag(name: "Science"),
+        Tag(name: "STEM"),
         Tag(name: "Math"),
+        Tag(name: "Physics"),
+        Tag(name: "Science"),
         Tag(name: "Programming"),
+        Tag(name: "Business"),
+        Tag(name: "Finance"),
+        Tag(name: "Economics"),
+        Tag(name: "Leadership"),
+        Tag(name: "Teamwork"),
+        Tag(name: "Volunteering"),
+        Tag(name: "Entrepreneurship"),
+        Tag(name: "General Knowledge"),
+        Tag(name: "History"),
+        Tag(name: "Literature"),
         Tag(name: "Art"),
-        Tag(name: "History")
+        Tag(name: "Design"),
+        Tag(name: "Music"),
+        Tag(name: "Current Events"),
+        Tag(name: "School")
     ]
 
     private let db = Firestore.firestore()
+    
+    // Reference to the survey store to allow tag changes to reload surveys
+    var surveyStore: SurveyStore?
 
     func loadTags() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -38,7 +56,14 @@ class TagViewModel: ObservableObject {
     func saveTags() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let tagNames = selectedTags.map { $0.name }
-        db.collection("users").document(userID).setData(["tags": tagNames], merge: true)
+        db.collection("users").document(userID).setData(["tags": tagNames], merge: true) { error in
+            if let error = error {
+                print("❌ Failed to save tags: \(error.localizedDescription)")
+            } else {
+                print("✅ Tags saved successfully.")
+                self.surveyStore?.loadSurveys()
+            }
+        }
     }
 
     func toggleTag(_ tag: Tag) {

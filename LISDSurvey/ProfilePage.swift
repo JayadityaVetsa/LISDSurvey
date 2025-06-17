@@ -2,13 +2,17 @@ import SwiftUI
 import FirebaseAuth
 
 struct ProfilePage: View {
+    // MARK: - Dependencies
     @EnvironmentObject var surveyStore: SurveyStore
     @Binding var isLoggedIn: Bool
     @StateObject private var tagViewModel = TagViewModel()
+
+    // MARK: - UI State
     @State private var showLogoutConfirmation = false
     @State private var showUploadConfirmation = false
     @State private var showDeleteConfirmation = false
 
+    // MARK: - Computed user data
     private var userEmail: String {
         Auth.auth().currentUser?.email ?? "User Email"
     }
@@ -17,18 +21,17 @@ struct ProfilePage: View {
         userEmail.components(separatedBy: "@").first?.capitalized ?? "User"
     }
 
+    // MARK: - Body
     var body: some View {
         NavigationStack {
             ZStack {
                 Color(.systemGray6).ignoresSafeArea()
 
                 VStack(spacing: 0) {
-                    // Top Bar
+                    // ───────────── Top Bar ─────────────
                     HStack {
                         Spacer()
-                        Button(action: {
-                            showLogoutConfirmation = true
-                        }) {
+                        Button(action: { showLogoutConfirmation = true }) {
                             Text("Logout")
                                 .font(.system(size: 16, weight: .semibold))
                                 .foregroundColor(.red)
@@ -37,7 +40,7 @@ struct ProfilePage: View {
                     .padding(.horizontal)
                     .padding(.top, 24)
 
-                    // User Info
+                    // ───────────── User Info ─────────────
                     VStack(spacing: 8) {
                         Image(systemName: "person.crop.circle.fill")
                             .resizable()
@@ -65,13 +68,15 @@ struct ProfilePage: View {
                     }
                     .padding(.top, 16)
 
-                    // Settings Form
+                    // ───────────── Settings Form ─────────────
                     Form {
+                        // --- Content ---
                         Section(header: Text("Content")) {
                             Label("Favorites", systemImage: "plus.circle")
                             Label("Downloads", systemImage: "arrow.down.circle")
                         }
 
+                        // --- Preferences ---
                         Section(header: Text("Preferences")) {
                             NavigationLink(destination: TagSelectionView(viewModel: tagViewModel)) {
                                 HStack {
@@ -89,9 +94,16 @@ struct ProfilePage: View {
                             Label("Theme", systemImage: "paintpalette")
                         }
 
+                        // --- Dev Tools ---
                         Section(header: Text("Dev Tools")) {
                             Button(action: {
+                                // 1. Upload canned surveys
                                 surveyStore.uploadTestSurveys()
+                                // 2. Refresh available list after a short delay so the new docs are visible
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    surveyStore.loadSurveys()
+                                }
+                                // 3. Show confirmation alert
                                 showUploadConfirmation = true
                             }) {
                                 Label("Upload Mock Surveys", systemImage: "plus.square.on.square")
@@ -112,7 +124,7 @@ struct ProfilePage: View {
                     .padding(.top, 16)
                 }
 
-                // Alerts
+                // MARK: - Alerts
                 .alert("Sign Out", isPresented: $showLogoutConfirmation) {
                     Button("Sign Out", role: .destructive) {
                         do {
@@ -145,6 +157,8 @@ struct ProfilePage: View {
                 }
             }
             .onAppear {
+                // Inject surveyStore into TagViewModel so tag changes refresh surveys
+                tagViewModel.surveyStore = surveyStore
                 tagViewModel.loadTags()
             }
             .navigationTitle("Profile")
